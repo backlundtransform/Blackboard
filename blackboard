@@ -1,0 +1,76 @@
+bif="bg2.jpg"
+
+import pygame, sys
+from pygame.locals import *
+
+pygame.init()
+screen=pygame.display.set_mode((640,360),0,32)
+background=pygame.image.load(bif).convert()
+
+
+points=[]
+lines=[]
+
+key=0
+pos=True
+w=5
+i=0
+start_pos=0,0
+end_pos=1,1
+def func( points, i ):
+   
+    
+    if len(points)>1:
+        lines.append(points)
+        for list in lines :
+            pygame.draw.lines(screen, (255, 255, 255), False, list, 4)
+          
+        
+        
+       
+    
+        
+    points=[]    
+    return  
+
+while True:
+    for event in pygame.event.get():
+        screen.blit(background, (0,0))
+        
+        
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    key=1
+                    i=i+1
+                    points=[]
+                if event.button == 3:
+                    lines=[]
+                    points=[]
+                
+        if event.type == pygame.MOUSEBUTTONUP:
+                key=0
+               
+            
+                
+               
+
+                
+        if event.type==MOUSEMOTION and key == 1:
+                
+                points.append(event.pos)
+                 
+        
+        if event.type==KEYDOWN:
+               
+                lines=[]
+                points=[]
+
+           
+                
+                
+             
+        func( points, i )      
+        pygame.display.update()
